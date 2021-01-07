@@ -9,6 +9,11 @@
 
 namespace dec
 {
+    std::string fileNameWithoutExt(std::string filename)
+    {
+        std::string ret=filename.substr(0,filename.rfind('.'));
+        return ret;
+    }
     class seed_map
     {
     private:

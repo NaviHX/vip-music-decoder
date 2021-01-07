@@ -10,7 +10,7 @@ int main(int argc,char** argv)
         std::string fn;
         while(std::cin>>fn)
         {
-            dec::decoder decoder_(fn,fn+".mp3");
+            dec::decoder decoder_(fn,dec::fileNameWithoutExt(fn)+".mp3");
             decoder_.get();
         }
     }
@@ -50,7 +50,7 @@ int main(int argc,char** argv)
             return 0;
         }   
         if(out=="")
-            out=in+".mp3";
+            out=dec::fileNameWithoutExt(in)+".mp3";
         dec::decoder decoder_(in,out);
         decoder_.get();
     }
