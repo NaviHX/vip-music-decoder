@@ -23,7 +23,7 @@ git clone https://github.com/NaviHX/vip-music-decoder.git
 cd ./vip-music-decoder
 mkdir build
 cd build
-cmake -G "NMake Makefiles"
+cmake -G "NMake Makefiles" ..
 nmake
 ```
 
