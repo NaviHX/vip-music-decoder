@@ -30,4 +30,4 @@ nmake
 ## 项目进度
 
 qmc解码 :heavy_check_mark:  
-自动确定输出文件名 :heavy_multiplication_x:
+自动确定输出文件名 :heavy_check_mark:
