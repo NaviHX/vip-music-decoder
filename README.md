@@ -50,3 +50,4 @@ ls | grep ".qmc" | ./qmcdump
 
 qmc解码 :heavy_check_mark:  
 自动确定输出文件名 :heavy_check_mark:
+ncm解码 未测试
