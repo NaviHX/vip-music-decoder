@@ -131,7 +131,7 @@ namespace dec
             fread(&header, sizeof(unsigned int), 1, mFile);
             if (header != (unsigned int)0x4e455443)
                 return false;
-            header = fread(&header, sizeof(unsigned int), 1, mFile);
+            fread(&header, sizeof(unsigned int), 1, mFile);
             if (header != (unsigned int)0x4d414446)
                 return false;
             return true;
@@ -170,7 +170,7 @@ namespace dec
         const std::string &getOPath() { return opath; }
         decoder(std::string const &path)
         {
-            if (mFile = fopen(path.c_str(), "rb"))
+            if ((mFile = fopen(path.c_str(), "rb")) == 0)
                 std::cerr << "Open File Error\n";
 
             ipath = path;
@@ -242,7 +242,7 @@ namespace dec
             FILE *w = NULL;
             int n = 0x8000, i = 0;
             unsigned char buffer[n];
-            while (feof(mFile))
+            while (!feof(mFile))
             {
                 n = fread(buffer, sizeof(unsigned char), n, mFile);
                 for (i = 0; i < n; i++)
@@ -262,13 +262,13 @@ namespace dec
                         opath += ".flac";
                         mFormat = ncmFormat::FLAC;
                     }
-                    w=fopen(opath.c_str(),"wb");
+                    w = fopen(opath.c_str(), "wb");
                 }
-                fwrite(buffer,sizeof(unsigned char),n,w);
+                fwrite(buffer, sizeof(unsigned char), n, w);
             }
             fflush(w);
             fclose(w);
-            std::cout<<opath<<std::endl;
+            std::cout << opath << std::endl;
         }
     };
 } // namespace dec
