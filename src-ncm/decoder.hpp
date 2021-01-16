@@ -158,12 +158,18 @@ namespace dec
             {
                 temp = mKeyBox[i];
                 c = ((temp + lastByte + key[keyOffset++]) & 0xff);
-                if (keyOffset > keyLen)
+                if (keyOffset >= keyLen)
                     keyOffset = 0;
                 mKeyBox[i] = mKeyBox[c];
                 mKeyBox[c] = temp;
                 lastByte = c;
             }
+            /* 
+            for(i=0;i<256;i++)
+            {
+                printf("0x%x ",mKeyBox[i]);
+            }
+             */
         }
         std::string mimgType(std::string &data)
         {
@@ -240,6 +246,7 @@ namespace dec
             std::string rawKeyData(keydata, n);
             std::string mKeyData;
             aesEcbDecrypt(coreKey, rawKeyData, mKeyData);
+            // 17 : (neteasemusicmusic) invalid key data
             buildKeyBox((unsigned char *)mKeyData.c_str() + 17, mKeyData.length() - 17);
             fread(reinterpret_cast<char *>(&n), sizeof(n), 1, mFile);
 
