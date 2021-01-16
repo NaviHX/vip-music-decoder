@@ -7,6 +7,13 @@
 #include <cstdio>
 #include <iostream>
 
+// For MetaData
+#include <taglib/mpegfile.h>
+#include <taglib/flacfile.h>
+#include <taglib/attachedpictureframe.h>
+#include <taglib/id3v2tag.h>
+#include <taglib/tag.h>
+
 namespace dec
 {
     std::string fileNameWithoutExt(std::string filename)
@@ -164,6 +171,50 @@ namespace dec
                 return "image/png";
             return "image/jpeg";
         }
+        void addMetaData()
+        {
+            TagLib::File *audioFile;
+            TagLib::Tag *tag;
+            TagLib::ByteVector byteVector(mimgData.c_str(), mimgData.length());
+
+            // Add Picture
+            if (mFormat == ncmFormat::MP3)
+            {
+                audioFile = new TagLib::MPEG::File(opath.c_str());
+                tag = dynamic_cast<TagLib::MPEG::File *>(audioFile)->ID3v2Tag(true);
+                if (mimgData.length() > 0)
+                {
+                    TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame;
+                    frame->setMimeType(mimgType(mimgData));
+                    frame->setPicture(byteVector);
+                }
+            }
+            else if (mFormat == ncmFormat::FLAC)
+            {
+                audioFile = new TagLib::FLAC::File(opath.c_str());
+                tag = audioFile->tag();
+                if (mimgData.length() > 0)
+                {
+                    TagLib::FLAC::Picture *cover = new TagLib::FLAC::Picture;
+                    cover->setMimeType(mimgType(mimgData));
+                    cover->setType(TagLib::FLAC::Picture::FrontCover);
+                    cover->setData(byteVector);
+                    dynamic_cast<TagLib::FLAC::File *>(audioFile)->addPicture(cover);
+                }
+            }
+
+            // Other info
+            if(mMetadata!=NULL)
+            {
+                tag->setAlbum(TagLib::String(mMetadata->getAlbum(),TagLib::String::UTF8));
+                tag->setArtist(TagLib::String(mMetadata->getArtist(),TagLib::String::UTF8));
+                tag->setTitle(TagLib::String(mMetadata->getName(),TagLib::String::UTF8));
+            }
+            tag->setComment(TagLib::String("Dumped by ncmdump",TagLib::String::UTF8));
+            
+            // Save File
+            audioFile->save();
+        }
 
     public:
         const std::string &getIPath() { return ipath; }
@@ -268,6 +319,7 @@ namespace dec
             }
             fflush(w);
             fclose(w);
+            addMetaData();
             std::cout << opath << std::endl;
         }
     };
