@@ -4,6 +4,9 @@
 
 ## 构建
 
+ncmdump依赖于[taglib](https://github.com/taglib/taglib)  
+如需使用ncm转换功能,请自行安装
+
 ### For Linux
 
 ```bash
@@ -15,17 +18,17 @@ chmod +x ./build.sh
 
 ### For Win10
 
-使用PowerShell,请安装MSVC编译器和git,并且设置环境变量  
-或者使用VS自带的命令行
+**请使用WSL/WSL2,然后跳转至 For Linux** ,或者按照如下步骤
 
-```bash
-git clone https://github.com/NaviHX/vip-music-decoder.git
-cd ./vip-music-decoder
-mkdir build
-cd build
-cmake -G "NMake Makefiles" ..
-nmake
-```
+> 旧版 : 使用PowerShell,请安装MSVC编译器和git,并且设置环境变量  
+或者使用VS自带的命令行  
+git clone https://github.com/NaviHX/vip-music-decoder.git  
+cd ./vip-music-decoder  
+mkdir build  
+cd build  
+cmake -G "NMake Makefiles" ..  
+nmake  
+尚未完善  
 
 ## 如何使用
 
@@ -34,16 +37,18 @@ nmake
 
 ### 使用例
 
+仅以qmcdump为例, .ncm文件的解码同理
+
 1. 批量转换当前目录下的qmc*文件  
 
 ```bash
 ls | grep ".qmc" | ./qmcdump
 ```
 
-2. 转换当前目录下的test.qmc0文件,输出为music.mp3
+2. 转换当前目录下的test.qmc0文件
 
 ```bash
-./qmcdump ./test.qmc0 -o ./music.mp3
+./qmcdump ./test.qmc0
 ```
 
 ## 项目进度
