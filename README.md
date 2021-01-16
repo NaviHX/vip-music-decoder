@@ -50,4 +50,7 @@ ls | grep ".qmc" | ./qmcdump
 
 qmc解码 :heavy_check_mark:  
 自动确定输出文件名 :heavy_check_mark:  
-ncm解码 未测试
+ncm解码 :heavy_check_mark: 
+
+已知BUG :  
+.ncm无法将封面图片写入文件
