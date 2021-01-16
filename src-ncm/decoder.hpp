@@ -118,7 +118,7 @@ namespace dec
     private:
         const unsigned char coreKey[17] = {0x68, 0x7A, 0x48, 0x52, 0x41, 0x6D, 0x73, 0x6F, 0x35, 0x6B, 0x49, 0x6E, 0x62, 0x61, 0x78, 0x57, 0};
         const unsigned char modifyKey[17] = {0x23, 0x31, 0x34, 0x6C, 0x6A, 0x6B, 0x5F, 0x21, 0x5C, 0x5D, 0x26, 0x30, 0x55, 0x3C, 0x27, 0x28, 0};
-        static const unsigned char mPNG[8];
+        const unsigned char mPNG[8] = {0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A};
         enum ncmFormat
         {
             MP3,
@@ -204,14 +204,14 @@ namespace dec
             }
 
             // Other info
-            if(mMetadata!=NULL)
+            if (mMetadata != NULL)
             {
-                tag->setAlbum(TagLib::String(mMetadata->getAlbum(),TagLib::String::UTF8));
-                tag->setArtist(TagLib::String(mMetadata->getArtist(),TagLib::String::UTF8));
-                tag->setTitle(TagLib::String(mMetadata->getName(),TagLib::String::UTF8));
+                tag->setAlbum(TagLib::String(mMetadata->getAlbum(), TagLib::String::UTF8));
+                tag->setArtist(TagLib::String(mMetadata->getArtist(), TagLib::String::UTF8));
+                tag->setTitle(TagLib::String(mMetadata->getName(), TagLib::String::UTF8));
             }
-            tag->setComment(TagLib::String("Dumped by ncmdump",TagLib::String::UTF8));
-            
+            tag->setComment(TagLib::String("Dumped by ncmdump", TagLib::String::UTF8));
+
             // Save File
             audioFile->save();
         }
