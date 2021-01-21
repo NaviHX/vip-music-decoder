@@ -8,7 +8,7 @@ int main(int argc,char** argv)
     if(argc==1)
     {
         std::string fn;
-        while(std::cin>>fn)
+        while(getline(std::cin,fn))
         {
             dec::decoder decoder_(fn,dec::fileNameWithoutExt(fn)+".mp3");
             decoder_.get();

@@ -56,5 +56,5 @@ qmc解码 :heavy_check_mark:
 ncm解码 :heavy_check_mark: 
 
 已知BUG :  
-.ncm无法将封面图片写入文件
-无法成功解析带空格的文件名
+.ncm无法将封面图片写入文件  
+无法成功解析带空格的文件名 :heavy_check_mark: FIXED
