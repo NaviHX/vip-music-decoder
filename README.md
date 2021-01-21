@@ -20,15 +20,13 @@ chmod +x ./build.sh
 
 **请使用WSL/WSL2,然后跳转至 For Linux** ,或者按照如下步骤
 
-> 旧版 : 使用PowerShell,请安装MSVC编译器和git,并且设置环境变量  
-或者使用VS自带的命令行  
-git clone https://github.com/NaviHX/vip-music-decoder.git  
-cd ./vip-music-decoder  
-mkdir build  
-cd build  
-cmake -G "NMake Makefiles" ..  
-nmake  
-尚未完善  
+```powershell
+git clone https://github.com/NaviHX/vip-music-decoder.git
+cd ./vip-music-decoder
+./build.ps1
+```
+
+> 如果没有安装`taglib`将会导致`ncmdump`的编译失败
 
 ## 如何使用
 
@@ -59,3 +57,4 @@ ncm解码 :heavy_check_mark:
 
 已知BUG :  
 .ncm无法将封面图片写入文件
+无法成功解析带空格的文件名
