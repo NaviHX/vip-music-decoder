@@ -2,6 +2,8 @@
 
 .qmc/.ncm格式解码器
 
+请点击[这里](https://github.com/NaviHX/vip-music-decoder-gui)了解GUI版本
+
 ## 构建
 
 ncmdump依赖于[taglib](https://github.com/taglib/taglib)  
