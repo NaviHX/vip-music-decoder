@@ -1,5 +1,7 @@
 # vip-music-decoder
 
+[新实现，包含在线解码](https://github.com/NaviHX/ncmpwn)
+
 .qmc/.ncm格式解码器
 
 请点击[这里](https://github.com/NaviHX/vip-music-decoder-gui)了解GUI版本
